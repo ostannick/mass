@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/mass', function() {
-    return view('mass');
+Route::resource('/mass', 'MassController');
+
+Route::get('/test', function(){
+  return view('mass.analyze');
 });

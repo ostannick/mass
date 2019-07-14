@@ -21,6 +21,8 @@
       <div class="ui container">
 
         <h1>Tryptic Digest Analyzer</h1>
+        <form method="POST" action="/mass">
+          @csrf
         <div class="ui big form">
           <div class="field">
           </div>
@@ -28,7 +30,7 @@
           <div class="field">
             <div class="field">
               <label>Protein Name<i class="fal fa-fw fa-question-circle"></i></label>
-              <input placeholder="Moraxella bovis n114 LbpB" type="text" value="">
+              <input name="protein_name" placeholder="Moraxella bovis n114 LbpB" type="text" value="">
             </div>
           </div>
 
@@ -101,10 +103,10 @@
             </ul>
           </div>
 
-          <div class="ui submit button">Submit</div>
+          <button type="submit" class="ui submit button">Submit</button>
 
         </div>
-
+      </form>
 
 
       </div>
