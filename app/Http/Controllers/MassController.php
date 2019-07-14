@@ -35,7 +35,12 @@ class MassController extends Controller
      */
     public function store(Request $request)
     {
-      $analysis = shell_exec('python -v');
+
+      #remove linebreaks
+      $sequence = preg_replace( "/\r|\n/", "", $request->protein_sequence );
+
+      $analysis = shell_exec("python ../python/pepgen.py $request->cutoff_low $request->cutoff_high $request->mass_tolerance $request->charge_state $sequence");
+      $analysis = json_decode($analysis);
 
         return view('mass.analyze')->with([
           'analysis' => $analysis,

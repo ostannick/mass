@@ -37,18 +37,18 @@
 
             <div class="field">
               <label>Protein Sequence</label>
-              <textarea></textarea>
+              <textarea class="monospace" name="protein_sequence"></textarea>
             </div>
 
           <div class="two fields">
             <div class="field">
               <label>Mass Spectrum</label>
-              <textarea></textarea>
+              <textarea class="monospace" name="mass_spectrum"></textarea>
             </div>
 
             <div class="field">
               <label>Peak List</label>
-              <textarea></textarea>
+              <textarea class="monospace" name="peak_list"></textarea>
             </div>
           </div>
 
@@ -56,26 +56,26 @@
           <div class="three fields">
             <div class="field">
               <label>Mass Tolerance (Da)<i class="fal fa-fw fa-question-circle"></i></label>
-              <input placeholder="Mass Tolerance (Da)" type="text" value="1.5">
+              <input name="mass_tolerance" placeholder="Mass Tolerance (Da)" type="text" value="1.5">
             </div>
             <div class="field">
               <label>Peptide Charge State<i class="fal fa-fw fa-question-circle"></i></label>
-              <input placeholder="Peptide Charge State" type="text" value="1">
+              <input name="charge_state" placeholder="Peptide Charge State" type="text" value="1">
             </div>
             <div class="field">
               <label>Intact Mass<i class="fal fa-fw fa-question-circle"></i></label>
-              <input placeholder="Intact Mass" type="text" value="">
+              <input name="intact_mass" placeholder="Intact Mass" type="text" value="">
             </div>
           </div>
 
           <div class="two fields">
             <div class="field">
               <label>Lower Mass Cutoff (Da)<i class="fal fa-fw fa-question-circle"></i></label>
-              <input placeholder="500" type="text" value="500">
+              <input name="cutoff_low" placeholder="500" type="text" value="500">
             </div>
             <div class="field">
               <label>Upper Mass Cutoff (Da)<i class="fal fa-fw fa-question-circle"></i></label>
-              <input placeholder="4000" type="text" value="4000">
+              <input name="cutoff_high" placeholder="4000" type="text" value="4000">
             </div>
           </div>
 
@@ -83,7 +83,7 @@
             <div class="field">
               <label>Matrix</label>
                 <div class="ui selection dropdown">
-                    <input type="hidden" name="gender">
+                    <input type="hidden" name="matrix">
                     <i class="dropdown icon"></i>
                     <div class="default text">Matrix</div>
                     <div class="menu">

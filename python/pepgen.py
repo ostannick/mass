@@ -3,13 +3,14 @@ import matplotlib.pyplot as plt
 import numpy as np
 import re
 import json
+import sys
 from Bio.SeqUtils import molecular_weight
 
 #Parameters
 
 #Peptides with a mass smaller than this value will be excluded from analysis, typically chosen based on instrumentatiton range
-filterMassLower = 500.0000
-filterMassUpper = 4000.0000
+filterMassLower = float(sys.argv[1])
+filterMassUpper = float(sys.argv[2])
 iodoacetamideMassShift = 57.0520
 methionineOxidationMassShift = 15.9994
 protonMass = 1.0000
@@ -18,12 +19,12 @@ protonMass = 1.0000
 commonContaminants = []
 
 #Mass Tolerance of the instrument in daltons/ppm
-massTolerance = 1.5000
+massTolerance = float(sys.argv[3])
 
 #Values can be integers -1; 0; +1; +2; +3;, etc.
-chargeState = 1
+chargeState = float(sys.argv[4])
 
-protSeq = "MYVELTQDKAVNPAQKSQVLSLVNFGNVDQLQLGDHTITLLPQEAGKTTQQSVKLPTGQTAVITSFGSSDGVLRLGSVSKTGLYLLGERTPVSQVPVQGQANYQGTWHGRIGHHWQSQAGYGEYDGKAKFEVDFGTKQLTGTLTEKSGIEPAFNLKATINGNGFSGTATSRSNGIYLDEGRQQNQQILTVESNNLTGAFYGENAKHLGGSFSFEKTLNDDETVVGGAVFYGTRTKEVDAAAELALVPRGSSAHHHHHHHHHH"
+protSeq = sys.argv[5]
 protSeqAALength = len(protSeq)
 
 #Split by trypsin regular expression (negative lookbehind, positive look-ahead on a negative set)
@@ -88,7 +89,7 @@ for peptide in pepList:
 
 output = {
     'sequence': protSeq,
-    'observablePeptides': pepList,
+    'peptides': pepList,
     'observablePeptideCount': str(len(pepList)),
     'matchCount': matchCount,
     'coverage': matchSumAA/protSeqAALength*100,

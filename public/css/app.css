@@ -3,3 +3,11 @@
   word-wrap: break-word;
 }
 
+.highlighted {
+  background-color: #b5e6da;
+}
+
+.protein-sequence {
+  line-height: 26pt;
+}
+

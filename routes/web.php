@@ -18,5 +18,5 @@ Route::get('/', function () {
 Route::resource('/mass', 'MassController');
 
 Route::get('/test', function(){
-  return view('mass.analyze');
+
 });

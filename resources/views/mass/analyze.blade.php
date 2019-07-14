@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-{{dd($analysis)}}
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,13 +29,16 @@
 
     <h3>Protein Sequence Coverage</h5>
 
-    <div class="ui teal progress" data-percent="40" id="example1">
+    <div class="ui teal progress" data-percent="{{number_format($analysis->coverage, 2)}}" id="example1">
       <div class="bar"></div>
-      <div class="label">40% Coverage</div>
+      <div class="label">{{number_format($analysis->coverage, 2)}}% Coverage</div>
     </div>
 
-    <div class="ui huge stacked segment monospace">
-      <p>MYVELTQDKAVNPAQKSQVLSLVNFGNVDQLQLGDHTITLLPQEAGKTTQQSVKLPTGQTAVITSFGSSDGVLRLGSVSKTGLYLLGERTPVSQVPVQGQANYQGTWHGRIGHHWQSQAGYGEYDGKAKFEVDFGTKQLTGTLTEKSGIEPAFNLKATINGNGFSGTATSRSNGIYLDEGRQQNQQILTVESNNLTGAFYGENAKHLGGSFSFEKTLNDDETVVGGAVFYGTRTKEVDAAAELALVPRGSSAHHHHHHHHHH</p>
+
+    <div class="ui huge stacked segment monospace protein-sequence">
+      <p>
+        @foreach($analysis->peptides as $peptide)<span @if($peptide->observed)class="highlighted" @endif>{{$peptide->sequence}}</span>@endforeach
+      </p>
     </div>
 
     <div class="ui divider"></div>
@@ -54,16 +56,23 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="negative">
-              <td class="monospace">SQVLSLVNFGNVDQLQLGDHTITLLPQEAGK</td>
-              <td>3336.7171</td>
-              <td class="negative"><i class="icon delete"></i></td>
-            </tr>
-            <tr class="positive">
-              <td class="monospace">SNGIYLDEGR</td>
-              <td>1124.1733</td>
-              <td><i class="icon checkmark"></i></td>
-            </tr>
+            @foreach($analysis->peptides as $peptide)
+              @if($peptide->visibility)
+                @if($peptide->observed)
+                <tr class="positive">
+                  <td class="monospace">{{$peptide->sequence}}</td>
+                  <td>{{$peptide->mass}}</td>
+                  <td><i class="icon checkmark"></i></td>
+                </tr>
+                @else
+                <tr class="negative">
+                  <td class="monospace">{{$peptide->sequence}}</td>
+                  <td>{{$peptide->mass}}</td>
+                  <td><i class="icon delete"></i></td>
+                </tr>
+                @endif
+              @endif
+            @endforeach
           </tbody>
         </table>
         </div>
