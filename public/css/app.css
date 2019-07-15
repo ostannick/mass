@@ -1,4 +1,13 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto+Mono);.monospace {
+@import url(https://fonts.googleapis.com/css?family=Roboto+Mono);body {
+  background-color: #F1F1F1;
+}
+
+.container {
+  background-color: white;
+  padding: 32px;
+}
+
+.monospace {
   font-family: "Roboto Mono";
   word-wrap: break-word;
 }

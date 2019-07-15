@@ -1,6 +1,7 @@
 #Import Libraries
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 import re
 import json
 import sys
@@ -49,26 +50,15 @@ for peptide in pepArray:
     })
 
 #import the mass list obtained experimentally
-#[0] = mass, [1] = relative intensity, [2] = match found?, [3] = possible contaminant ID
-#this is the format the mass list needs to be parsed into
-massList = [
-    {'mass': 649.7179, 'hasMatch': False, 'contamMatch': False, 'contamSuspect': ''},
-    {'mass': 1021.689, 'hasMatch': False, 'contamMatch': False, 'contamSuspect': ''},
-    {'mass': 1123.709, 'hasMatch': False, 'contamMatch': False, 'contamSuspect': ''},
-    {'mass': 1913.399, 'hasMatch': False, 'contamMatch': False, 'contamSuspect': ''},
-    {'mass': 1925.701, 'hasMatch': False, 'contamMatch': False, 'contamSuspect': ''},
-    {'mass': 1932.825, 'hasMatch': False, 'contamMatch': False, 'contamSuspect': ''},
-    {'mass': 2005.400, 'hasMatch': False, 'contamMatch': False, 'contamSuspect': ''},
-    {'mass': 2021.058, 'hasMatch': False, 'contamMatch': False, 'contamSuspect': ''},
-    {'mass': 2211.327, 'hasMatch': False, 'contamMatch': False, 'contamSuspect': ''},
-    {'mass': 2265.045, 'hasMatch': False, 'contamMatch': False, 'contamSuspect': ''},
-    {'mass': 2282.866, 'hasMatch': False, 'contamMatch': False, 'contamSuspect': ''},
-    {'mass': 2308.994, 'hasMatch': False, 'contamMatch': False, 'contamSuspect': ''},
-    {'mass': 2328.861, 'hasMatch': False, 'contamMatch': False, 'contamSuspect': ''},
-    {'mass': 2667.365, 'hasMatch': False, 'contamMatch': False, 'contamSuspect': ''},
-    {'mass': 3335.326, 'hasMatch': False, 'contamMatch': False, 'contamSuspect': ''},
-    {'mass': 3360.336, 'hasMatch': False, 'contamMatch': False, 'contamSuspect': ''},
-]
+df = pd.read_excel(sys.argv[6], 0, skiprows=2)
+peaks = df[['m/z', 'Rel. Intens.']]
+
+
+#create the massList array
+massList = []
+for index, row in peaks.iterrows():
+    massList.append({'mass': row['m/z'], 'fracIon': row['Rel. Intens.'], 'hasMatch': False, 'contamMatch': False, 'contamSuspect': ''})
+
 
 #Match peptides found and mark as true
 matchCount = 0
@@ -76,8 +66,9 @@ matchSumAA = 0
 for peptide in pepList:
     for mass in massList:
         if((mass['mass'] >= (peptide['mass'] - massTolerance)) & (mass['mass'] <= (peptide['mass'] + massTolerance))):
-            peptide['observed'] = True;
-            mass['hasMatch'] = True;
+            peptide['observed'] = True
+            peptide['fracIon'] = mass['fracIon']
+            mass['hasMatch'] = True
             matchCount += 1
             matchSumAA += len(peptide['sequence'])
 
@@ -98,3 +89,5 @@ output = {
 output = json.dumps(output)
 
 print(output)
+
+#print(output)

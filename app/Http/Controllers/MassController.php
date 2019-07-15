@@ -38,13 +38,19 @@ class MassController extends Controller
 
       #remove linebreaks
       $sequence = preg_replace( "/\r|\n/", "", $request->protein_sequence );
+      $filename = $request->protein_name . time() . '.xlsx';
 
-      $analysis = shell_exec("python ../python/pepgen.py $request->cutoff_low $request->cutoff_high $request->mass_tolerance $request->charge_state $sequence");
+      #parse the peak list
+      $peaks = $request->peaks->storeAs('public/mass_lists/', $filename);
+
+      #shell runs from 'public' directory
+      $analysis = shell_exec("python ../python/pepgen.py $request->cutoff_low $request->cutoff_high $request->mass_tolerance $request->charge_state $sequence ../storage/app/public/mass_lists/$filename");
       $analysis = json_decode($analysis);
 
         return view('mass.analyze')->with([
           'analysis' => $analysis,
-          'protein_name' => $request->protein_name
+          'protein_name' => $request->protein_name,
+          'matrix' => $request->matrix
         ]);
     }
 

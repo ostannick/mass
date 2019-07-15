@@ -2,7 +2,7 @@
 
 @section('content')
   <h1>Tryptic Digest Analyzer</h1>
-  <form method="POST" action="/mass">
+  <form method="POST" action="/mass" enctype="multipart/form-data">
     @csrf
   <div class="ui big form">
     <div class="field">
@@ -21,17 +21,10 @@
         <textarea class="monospace" name="protein_sequence"></textarea>
       </div>
 
-    <div class="two fields">
       <div class="field">
-        <label>Mass Spectrum</label>
-        <textarea class="monospace" name="mass_spectrum"></textarea>
+        <label>Upload Mass List</label>
+        <input type="file" name="peaks">
       </div>
-
-      <div class="field">
-        <label>Peak List</label>
-        <textarea class="monospace" name="peak_list"></textarea>
-      </div>
-    </div>
 
 
     <div class="three fields">
