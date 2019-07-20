@@ -6,16 +6,12 @@
     <i class="fal fa-fw fa-atom"></i>
     PMF
   </a>
-  <a href="#" class="item">
-    <i class="fal fa-fw fa-dna"></i>
-    Cloning
-  </a>
-  <a href="#" class="item">
+  <a href="/entrez" class="item">
     <i class="fal fa-fw fa-search"></i>
-    Entrez
+    NCBI Entrez
   </a>
   <a href="#" class="item">
     <i class="fal fa-fw fa-fire"></i>
-    	&#916;G Unfolding
+    Tycho.NT
   </a>
 </div>

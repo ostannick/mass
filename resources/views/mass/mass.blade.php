@@ -77,7 +77,7 @@
       </ul>
     </div>
 
-    <button type="submit" class="ui submit button">Submit</button>
+    <button type="submit" class="ui teal submit button">Submit</button>
 
   </div>
 </form>

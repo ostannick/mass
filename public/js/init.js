@@ -3,6 +3,8 @@ $(document).ready(function(){
   $('.selection.dropdown').dropdown();
   $('.progress').progress();
 
+  $('.menu .item').tab();
+
   $('.browse').popup({
     inline     : true,
     hoverable  : true,

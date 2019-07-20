@@ -17,6 +17,11 @@ Route::get('/', function () {
 
 Route::resource('/mass', 'MassController');
 
+Route::get('/entrez', function() {
+  return view('entrez.entrez');
+});
+Route::post('/entrez/records', 'EntrezController@records');
+
 Route::get('/test', function(){
 
 });
