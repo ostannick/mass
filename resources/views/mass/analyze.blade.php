@@ -2,8 +2,16 @@
 
 @section('content')
 
-      <h1>{{$protein_name}}</h1>
-      <h5>{{\Carbon\Carbon::now()}}</h2>
+    <h1 class="ui teal">{{$protein_name}} (Job ID: {{$job}})</h1>
+    <h5>{{\Carbon\Carbon::now()->toDayDateTimeString()}}</h2>
+
+    <div class="ui message">
+      <div class="header">Notes:</div>
+      <ul class="list">
+        <li>Sequence coverage is dependent on the propensity of your peptides to ionize.</li>
+        <li>This job will not be saved. Print your results now, or you will need to re-submit your data to view your analysis after leaving this page.</li>
+      </ul>
+    </div>
 
     <div class="ui divider"></div>
 
@@ -11,7 +19,7 @@
 
     <div class="ui teal progress" data-percent="{{number_format($analysis->coverage, 2)}}" id="example1">
       <div class="bar"></div>
-      <div class="label">{{number_format($analysis->coverage, 2)}}% Coverage</div>
+      <div class="label">{{number_format($analysis->coverage, 2)}}% Sequence Coverage</div>
     </div>
 
     <div class="ui huge stacked segment monospace protein-sequence">
@@ -22,13 +30,32 @@
 
     <div class="ui divider"></div>
 
+    <h3>Metrics and Graphs</h3>
+    <div class="ui two column grid">
+      <div class="column">
+        <div class="ui segment">
+          <img class="ui fluid image" src="{{asset('storage/pmf_jobs/' . $job . '/tolerances.png')}}" alt="">
+        </div>
+      </div>
+      <div class="column">
+        <div class="ui segment">
+          <img class="ui fluid image" src="{{asset('storage/pmf_jobs/' . $job . '/tolerances.png')}}" alt="">
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="ui divider"></div>
+
     <h3>Peptide Analysis - <span style="font-style: italic">in silico</span> Digest</h5>
     <table class="ui celled table">
     <thead>
       <tr>
         <th>Peptide Sequence</th>
         <th>Mass</th>
-        <th>Ionization Propensity</th>
+        <th>Ionization Propensity (Rel.)</th>
+        <th>Ionization Propensity (Abs.)</th>
         <th>Match</th>
       </tr>
     </thead>
@@ -40,6 +67,7 @@
             <td>{{$peptide->sequence}}</td>
             <td>{{$peptide->mass}}</td>
             <td>{{$peptide->fracIon}}</td>
+            <td>{{$peptide->absIon}}</td>
             <td><i class="icon checkmark"></i></td>
           </tr>
           @else
@@ -47,6 +75,7 @@
             <td class="monospace">{{$peptide->sequence}}</td>
             <td>{{$peptide->mass}}</td>
             <td>0.00</td>
+            <td>0</td>
             <td><i class="icon delete"></i></td>
           </tr>
           @endif
@@ -61,7 +90,8 @@
   <thead>
     <tr>
       <th>Mass</th>
-      <th>Ionization Propensity</th>
+      <th>Ionization Propensity (Rel.)</th>
+      <th>Ionization Propensity (Abs.)</th>
       <th>Suspect</th>
     </tr>
   </thead>
@@ -71,6 +101,7 @@
         <tr>
           <td>{{$mass->mass}}</td>
           <td>{{$mass->fracIon}}</td>
+          <td>{{$mass->absIon}}</td>
           <td>N/A</td>
         </tr>
       @endif

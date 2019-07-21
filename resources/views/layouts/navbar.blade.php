@@ -1,6 +1,6 @@
 <div class="ui inverted menu">
   <a href="/" class="header item">
-    <i class="fab fa-fw fa-raspberry-pi"></i>Nick's piServer
+    MLab
   </a>
   <a href="/mass" class="item">
     <i class="fal fa-fw fa-atom"></i>

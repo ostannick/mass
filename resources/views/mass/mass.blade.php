@@ -11,7 +11,7 @@
     <div class="field">
       <div class="field">
         <label>Protein Name<i class="fal fa-fw fa-question-circle"></i></label>
-        <input name="protein_name" placeholder="Moraxella bovis n114 LbpB" type="text" value="">
+        <input name="protein_name" placeholder="n114_Mb_LbpB_Cempty" type="text" value="">
       </div>
     </div>
 
@@ -45,7 +45,7 @@
     <div class="two fields">
       <div class="field">
         <label>Lower Mass Cutoff (Da)<i class="fal fa-fw fa-question-circle"></i></label>
-        <input name="cutoff_low" placeholder="500" type="text" value="500">
+        <input name="cutoff_low" placeholder="650" type="text" value="650">
       </div>
       <div class="field">
         <label>Upper Mass Cutoff (Da)<i class="fal fa-fw fa-question-circle"></i></label>
@@ -61,7 +61,7 @@
               <i class="dropdown icon"></i>
               <div class="default text">Matrix</div>
               <div class="menu">
-                  <div class="item" data-value="HCCA" selected>a-4-cyano-hydroxycinaminnic acid (HCCA)</div>
+                  <div class="item" data-value="HCCA" selected>&alpha;-4-cyano-hydroxycinaminnic acid (HCCA)</div>
                   <div class="item" data-value="SA">Sinnapinic Acid (SA)</div>
                   <div class="item" data-value="DHB">Dihydroxybenzoic Acid (DHB)</div>
               </div>
@@ -77,7 +77,14 @@
       </ul>
     </div>
 
-    <button type="submit" class="ui teal submit button">Submit</button>
+    <div class="field ui toggle checkbox">
+      <input type="checkbox" name="skipDB" value="1">
+      <label>Include this data in machine learning dataset</label>
+    </div>
+
+    <div class="field">
+      <button type="submit" class="ui teal submit button">Submit</button>
+    </div>
 
   </div>
 </form>
