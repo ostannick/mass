@@ -18,10 +18,9 @@
     </head>
 
     <body>
-
+      @include('layouts.navbar')
+      
       <div class="ui container">
-        <header>
-          @include('layouts.navbar')
           @yield('content')
       </div>
 

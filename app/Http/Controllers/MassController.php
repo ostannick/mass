@@ -92,14 +92,15 @@ class MassController extends Controller
         }
       }
 
+      #file_put_contents($job_directory . 'seq.fa', $analysis->seq);
+      file_put_contents($job_directory . 'log.txt', json_encode($analysis));
 
-
-        return view('mass.analyze')->with([
-          'analysis' => $analysis,
-          'protein_name' => $request->protein_name,
-          'matrix' => $request->matrix,
-          'job' => $job
-        ]);
+      return view('mass.analyze')->with([
+        'analysis' => $analysis,
+        'protein_name' => $request->protein_name,
+        'matrix' => $request->matrix,
+        'job' => $job
+      ]);
     }
 
     /**

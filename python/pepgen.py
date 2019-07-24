@@ -1,12 +1,15 @@
 #Import Libraries
 import seaborn as sns
 import matplotlib.pyplot as plt
+from matplotlib.pyplot import figure
 import numpy as np
 import pandas as pd
 import re
 import json
 import sys
 from Bio.SeqUtils import molecular_weight
+
+
 
 
 #Settings
@@ -41,11 +44,12 @@ pepArray = re.split('(?<=[RK])(?=[^P])', protSeq)
 
 pepList = []
 #Calculate the peptide masses with biopython's molecular_weight function
+possibleObserved = 0
 for peptide in pepArray:
-
     visibility = False
     if((molecular_weight(peptide, 'protein') >= filterMassLower) & (molecular_weight(peptide, 'protein') <= filterMassUpper)):
         visibility = True
+        possibleObserved += 1
 
     #add the carbamidomethyl group and one dalton for the protonated state
     fixedModificationShift = len(re.findall('C', peptide)) * iodoacetamideMassShift + (protonMass * chargeState)
@@ -72,6 +76,7 @@ for index, row in peaks.iterrows():
 #Match peptides found and mark as true
 matchCount = 0
 matchSumAA = 0
+
 for peptide in pepList:
     for mass in massList:
         if((mass['mass'] >= (peptide['mass'] - massTolerance)) & (mass['mass'] <= (peptide['mass'] + massTolerance))):
@@ -86,7 +91,7 @@ for peptide in pepList:
             break
 
 #Generate suggested tolerance graph
-tolRef = np.arange(0, 10, 0.1)
+tolRef = np.arange(0, 10, 0.1).tolist()
 tolerances = []
 for tol in tolRef:
     currentMatches = 0;
@@ -96,18 +101,43 @@ for tol in tolRef:
                 currentMatches += 1
     tolerances.append(currentMatches / len(pepList))
 
-tolDict = {'Instrument Tolerance': tolRef, 'Fraction of Matches': tolerances}
-tolDf = pd.DataFrame(tolDict)
 
-sns.relplot(x="Instrument Tolerance", y="Fraction of Matches", data=tolDf)
+tol_series_x = tolRef
+tol_series_y = tolerances
 
-plt.savefig(jobDir + 'tolerances.png')
+plt.scatter(tol_series_x, tol_series_y, alpha=0.5)
+plt.title('Tolerance Samples')
+plt.xlabel('Mass Tolerance')
+plt.ylabel('Ion Coverage')
+plt.title('Mass Tolerance Sampling')
+fig = plt.gcf()
+fig.set_size_inches(10, 10)
+plt.savefig(jobDir + 'tolerances.png', dpi=150, bbox_inches = 'tight', pad_inches = 0)
+
+stem_series_x = df['m/z'].tolist()
+stem_series_y = []
+for peak in massList:
+    if peak['hasMatch'] is False:
+        stem_series_y.append(peak['fracIon'] * -1)
+    else:
+        stem_series_y.append(peak['fracIon'])
+
+
+markerline, stemlines, baseline = plt.stem(stem_series_x, stem_series_y, linefmt='grey', markerfmt='kx', use_line_collection=True)
+plt.setp(stemlines, 'linewidth', 1)
+plt.xlabel('m/z')
+plt.ylabel('Relative Intensity')
+plt.ylim(-1.1, 1.1)
+plt.xlim(filterMassLower, filterMassUpper)
+plt.title('Observed Ions (pos = match)')
+plt.savefig(jobDir + 'stems.png', dpi=150, bbox_inches = 'tight', pad_inches = 0)
 
 #Label peptides we found experimentally but do not have an in silico match for... as to predict contaminants
 output = {
     'sequence': protSeq,
     'peptides': pepList,
     'observablePeptideCount': str(len(pepList)),
+    'possibleObserved': possibleObserved,
     'matchCount': matchCount,
     'coverage': matchSumAA/protSeqAALength*100,
     'massList': massList,

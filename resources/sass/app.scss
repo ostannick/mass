@@ -20,3 +20,85 @@ body{
 .protein-sequence{
   line-height: 26pt;
 }
+
+//Navbar
+.navbar{
+  height: 50px;
+  display: inline-flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+  width: 100%;
+  background-color: white;
+
+  li.item.main{
+    display: inline-flex;
+    flex-direction: column;
+    background-color: $teal;
+    font-weight: 900;
+    a{
+        color: white;
+    }
+
+    &:hover{
+
+    }
+  }
+
+  li.item{
+    box-sizing: border-box;
+    cursor: pointer;
+    list-style: none;
+    text-align: center;
+    padding: 16px;
+    user-select: none;
+
+    &:hover{
+      background-color: $green-translucent;
+      ul{
+        display: block;
+      }
+    }
+
+    //Dropdown
+    ul{
+      position: relative;
+      z-index: 999;
+      display: none;
+      box-sizing: border-box;
+      background-color: white;
+      padding: 0;
+      box-shadow: 0 6px 6px 0 $grey;
+      border-radius: 0 0 3px 3px;
+      border-left: 1px solid $grey;
+      border-right: 1px solid $grey;
+      border-bottom: 1px solid $grey;
+
+      li{
+        margin: 0;
+        list-style: none;
+        padding: 8px;
+        text-align: left;
+        cursor: pointer;
+        i{
+          display: inline-flex;
+          flex-direction: row;
+          padding-left: 4px;
+          margin-right: 8px;
+        }
+
+        &:hover{
+          background-color: $grey-translucent;
+        }
+      }
+    }
+  }
+
+
+}
+
+.paginator-container{
+  display: inline-flex;
+  justify-content: center;
+  width: 100%;
+
+}

@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 
 Route::resource('/mass', 'MassController');
+Route::resource('/peptides', 'PeptideController');
 
 Route::get('/entrez', function() {
   return view('entrez.entrez');
