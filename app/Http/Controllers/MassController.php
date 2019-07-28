@@ -46,14 +46,21 @@ class MassController extends Controller
       #Remove linebreaks
       $sequence = preg_replace( "/\r|\n/", "", $request->protein_sequence);
       $filename = $request->protein_name . time() . '.xlsx';
+      $spectrum = $request->protein_name . time() . '_MS.txt';
+
+      $spectrum_path = $job_directory . $spectrum;
       $datapath = $job_directory . $filename;
 
-      #Parse the peak list
+      #Save the mass spectrum
+      $spectra = $request->ms->storeAs('public/pmf_jobs/' . $job, $spectrum);
+
+      #Save the peak list
       $peaks = $request->peaks->storeAs('public/pmf_jobs/' . $job, $filename);
 
       #Shell runs from 'public' directory
-      $analysis = shell_exec("py ../python/pepgen.py $request->cutoff_low $request->cutoff_high $request->mass_tolerance $request->charge_state $sequence $datapath $job_directory");
+      $analysis = shell_exec("py ../python/pepgen.py $request->cutoff_low $request->cutoff_high $request->mass_tolerance $request->charge_state $sequence $datapath $spectrum_path $job_directory");
 
+      #Decode the JSON output from the python script pepgen.py
       $analysis = json_decode($analysis);
 
       if($request->skipDB == '1')

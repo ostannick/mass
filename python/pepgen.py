@@ -9,9 +9,6 @@ import json
 import sys
 from Bio.SeqUtils import molecular_weight
 
-
-
-
 #Settings
 sns.set(style="darkgrid")
 
@@ -36,8 +33,11 @@ chargeState = float(sys.argv[4])
 protSeq = sys.argv[5]
 protSeqAALength = len(protSeq)
 
+#Argument 6 is massList
+#Argument 7 is spectrum
+
 #Job directory
-jobDir = sys.argv[7]
+jobDir = sys.argv[8]
 
 #Split by trypsin regular expression (negative lookbehind, positive look-ahead on a negative set)
 pepArray = re.split('(?<=[RK])(?=[^P])', protSeq)
@@ -111,7 +111,7 @@ plt.xlabel('Mass Tolerance')
 plt.ylabel('Ion Coverage')
 plt.title('Mass Tolerance Sampling')
 fig = plt.gcf()
-fig.set_size_inches(10, 10)
+fig.set_size_inches(5, 5)
 plt.savefig(jobDir + 'tolerances.png', dpi=150, bbox_inches = 'tight', pad_inches = 0)
 
 stem_series_x = df['m/z'].tolist()
@@ -144,5 +144,29 @@ output = {
     'tolerances': tolerances,
 }
 output = json.dumps(output)
+
+#Append headers to the mass spectrum file
+with open(sys.argv[7], 'r') as original: data = original.read()
+with open('ms.txt', 'w') as modified: modified.write("mz intensity\n" + data)
+
+df2 = pd.read_csv('ms.txt', delim_whitespace=True)
+
+mz = df2['mz'].tolist()
+intensity = df2['intensity'].tolist()
+
+plt.clf()
+fig.set_size_inches(12,3)
+plt.plot(mz, intensity, color="k", linewidth=0.4)
+plt.xlabel('m/z')
+plt.ylabel('Absolute Arbitrary Intensity')
+plt.xlim(filterMassLower, filterMassUpper)
+plt.gca().set_ylim(bottom=0)
+
+for mass in massList:
+    plt.annotate(str(round(mass['mass'], 4)), xy=(mass['mass'],mass['absIon']), size="10", alpha=0.3)
+
+plt.gcf()
+plt.savefig(jobDir + 'ms.png', pad_inches=0)
+
 
 print(output)

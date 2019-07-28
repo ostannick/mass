@@ -21,11 +21,17 @@
         <textarea class="monospace" name="protein_sequence"></textarea>
       </div>
 
-      <div class="field">
-        <label>Upload Mass List</label>
-        <input type="file" name="peaks">
-      </div>
+      <div class="two fields">
+        <div class="field">
+          <label>Upload Mass List</label>
+          <input type="file" name="peaks">
+        </div>
 
+        <div class="field">
+          <label>Upload Mass Spectra</label>
+          <input type="file" name="ms">
+        </div>
+      </div>
 
     <div class="three fields">
       <div class="field">
@@ -67,13 +73,25 @@
               </div>
           </div>
       </div>
+
+      <div class="field">
+        <label>Protease</label>
+          <div class="ui selection dropdown">
+              <input type="hidden" name="enyzme">
+              <i class="dropdown icon"></i>
+              <div class="default text">Trypsin</div>
+              <div class="menu">
+                  <div class="item" data-value="HCCA" selected>Trypsin</div>
+                  <div class="item" data-value="SA">Chymotrypsin</div>
+              </div>
+          </div>
+      </div>
     </div>
 
     <div class="ui message">
       <div class="header">Notes:</div>
       <ul class="list">
-        <li>Proteins assumed to be treated with iodoacetamide</li>
-        <li>Proteins assumed to be treated with trypsin</li>
+        <li>Proteins assumed to be C-alkylated with iodoacetamide</li>
       </ul>
     </div>
 

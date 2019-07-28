@@ -15,6 +15,15 @@ Route::get('/', function () {
     return view('home');
 });
 
+//Learning
+Route::get('/books', function() {
+    return view('learn.books');
+});
+
+Route::get('/python', function() {
+  return view('python.lessons.introduction');
+});
+
 Route::resource('/mass', 'MassController');
 Route::resource('/peptides', 'PeptideController');
 

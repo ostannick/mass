@@ -29,7 +29,16 @@
 
     <div class="ui divider"></div>
 
-    <h3>Statistics & Metrics</h3>
+    <h3>Spectra & Metrics</h3>
+
+    <div class="ui one column grid">
+      <div class="column">
+        <div class="ui segment">
+          <img class="ui fluid image" src="{{asset('storage/pmf_jobs/' . $job . '/ms.png')}}" alt="">
+        </div>
+      </div>
+    </div>
+
     <div class="ui two column grid">
       <div class="column">
         <div class="ui segment">
@@ -45,10 +54,12 @@
 
 
 
+
+
     <div class="ui divider"></div>
 
     <h3>Peptide Analysis - <span style="font-style: italic">in silico</span> Digest</h5>
-    <table class="ui celled table">
+    <table class="ui compact celled table">
     <thead>
       <tr>
         <th>Peptide Sequence</th>
@@ -85,7 +96,7 @@
 
   <div class="ui divider"></div>
   <h3>Experimentally Observed Peptides with No Match</h3>
-  <table class="ui celled table">
+  <table class="ui compact celled table">
   <thead>
     <tr>
       <th>Mass</th>

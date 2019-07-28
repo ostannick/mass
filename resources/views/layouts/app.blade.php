@@ -18,11 +18,19 @@
     </head>
 
     <body>
-      @include('layouts.navbar')
-      
-      <div class="ui container">
-          @yield('content')
+
+      @include('layouts.sidebar')
+
+      <div class="pusher">
+        @include('layouts.navbar')
+        <div class="ui container">
+            @yield('content')
+        </div>
       </div>
 
     </body>
+
+    <footer>
+
+    </footer>
   </html>
