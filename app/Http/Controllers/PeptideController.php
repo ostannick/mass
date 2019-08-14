@@ -89,4 +89,38 @@ class PeptideController extends Controller
     {
         //
     }
+
+    public function analyze(Request $request)
+    {
+      $dir = "training/";
+      $job = \Str::random(8);
+      $dataset = Peptide::where('matrix', 'HCCA')->get();
+
+      //CSV File
+      $data_file = fopen($dir . 'training_set_' . $job . '.csv', 'w');
+      fwrite($data_file, 'Sequence,Ionization,IonBool,');
+      fwrite($data_file, "\n");
+
+      foreach($dataset as $peptide){
+        $ionBool = "Failed to Ionize";
+        if($peptide->abs_ion > 0){
+          $ionBool = "Ionizer";
+        }
+        fwrite($data_file, $peptide->sequence . "," . $peptide->abs_ion . "," . $ionBool);
+        fwrite($data_file, "\n");
+      }
+      fclose($data_file);
+
+      //FASTA File
+      $seq_file = fopen($dir . 'query_sequences_' . $job . '.fa', 'w');
+      foreach($dataset as $peptide){
+        fwrite($seq_file, '>' . $peptide->parent . '_' . $peptide->job);
+        fwrite($seq_file, "\n");
+        fwrite($seq_file, $peptide->sequence);
+        fwrite($seq_file, "\n");
+      }
+
+
+    }
+
 }

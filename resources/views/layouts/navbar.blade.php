@@ -1,6 +1,6 @@
 <div class="navbar">
 
-  <li class="main item"><a href="/"><i class="fal fa-fw fa-wave-square"></i></a></li>
+  <li class="main item"><a href="/cv"><i class="fal fa-fw fa-wave-square"></i></a></li>
   <li class="item sandwich"><i class="fal fa-fw fa-bars"></i></li>
   <li class="item">
     <i class="fal fa-fw fa-chart-bar"></i> Mass Spectrometry Tools
@@ -47,7 +47,30 @@
   </li>
 
   <div class="navbar-login">
-    <li><button class="ui violet button">Register</button></li>
-    <li><button class="ui teal button">Log In</button></li>
+    <li><button class="ui violet button disabled">Register</button></li>
+    <li><button id="login-button" class="ui teal button">Log In</button></li>
   </div>
 </div>
+
+
+@guest
+<div id="login-modal" class="ui modal">
+  <div class="header">Log In</div>
+  <div class="content">
+    <div class="ui massive form">
+  <div class="two fields">
+    <div class="field">
+      <input placeholder="Username" type="text">
+    </div>
+    <div class="field">
+      <input placeholder="Password" type="password">
+    </div>
+  </div>
+</div>
+  </div>
+  <div class="actions">
+    <div class="ui red cancel button">Cancel</div>
+    <div class="ui teal button">Login</div>
+  </div>
+</div>
+@endguest

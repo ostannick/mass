@@ -3,7 +3,7 @@
     <div class="item">
       <div class="header"><i class="fal fa-wave-square"></i> NKHO</div>
       <div class="menu">
-        <a class="item">Home</a>
+        <a href="/" class="item">Home</a>
       </div>
     </div>
     <div class="item">

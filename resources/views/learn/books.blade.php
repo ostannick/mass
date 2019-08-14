@@ -13,7 +13,7 @@
 
   <p>This resource was originally created as a lab manual for an undergraduate laboratory course at the University of Toronto.</p>
 
-  <a href="/downloads/MIBMC.pdf" class="big ui blue button">
+  <a href="/downloads/MIBMC_2019.pdf" class="big ui blue button">
   <i class="fal fa-fw fa-file-download"></i>
   Download PDF
 </a>
@@ -27,10 +27,11 @@
   <p>This is a LaTeX-formatted manual covering how to draw common biological entities such as lipid bilayers, etc. in Adobe Illustrator.</p>
 
 
-  <button class="big ui purple button">
+  <a href="/downloads/MBF_2019.pdf" class="big ui purple button">
   <i class="fal fa-fw fa-file-download"></i>
   Download PDF
   </button>
+</a>
 </div>
 
 <div class="ui segment">
