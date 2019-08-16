@@ -8,7 +8,7 @@
       <a href="/mass"><li>Peptide Mass Fingerprinting Analysis</li></a>
       <a href="/peptides"><li>Peptide Database</li></a>
       <a href="/peptides"><li>Peptide Analytics</li></a>
-      <a href="/nn"><li>Train Neural Network</li></a>
+      <a href="/nn"><li>MALDI Ionization Predictor</li></a>
     </ul>
   </li>
   <li class="item">
@@ -20,8 +20,7 @@
   <li class="item">
     <i class="fal fa-fw fa-atom-alt"></i> NMR Tools
     <ul>
-      <a href="#"><li>PROSECCO Graphs</li></a>
-      <a href="#"><li>Low Hanging Fruit</li></a>
+      <a href="/prosecco"><li>Visualize Chemical Shift Predictions</li></a>
     </ul>
   </li>
   <li class="item">

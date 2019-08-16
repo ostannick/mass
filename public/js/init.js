@@ -7,6 +7,15 @@ $(document).ready(function(){
     $('.ui.sidebar').sidebar('toggle');
   });
 
+  //Close messages
+  $('.message .close')
+  .on('click', function() {
+    $(this)
+      .closest('.message')
+      .transition('fade')
+    ;
+  });
+
   $('.menu .item').tab();
 
   $('.ui.modal').modal();
