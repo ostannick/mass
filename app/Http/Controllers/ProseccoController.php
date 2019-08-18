@@ -51,7 +51,7 @@ class ProseccoController extends Controller
       $shifts = $request->cs->storeAs('public/prosecco_jobs/' . $job, $filename);
 
       #Shell runs from 'public' directory
-      $analysis = shell_exec("py ../python/prosecco_graphical_v2.py $datapath $job_directory");
+      $analysis = shell_exec("python ../python/prosecco_graphical_v2.py $datapath $job_directory");
 
       //Add low hanging fruit script
       //Add script for visualizing out-of-the-ordinary chemical shifts

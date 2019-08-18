@@ -81,8 +81,8 @@
               <i class="dropdown icon"></i>
               <div class="default text">Trypsin</div>
               <div class="menu">
-                  <div class="item" data-value="HCCA" selected>Trypsin</div>
-                  <div class="item" data-value="SA">Chymotrypsin</div>
+                  <div class="item" data-value="Trypsin" selected>Trypsin</div>
+                  <div class="item" data-value="Chymotrypsin">Chymotrypsin</div>
               </div>
           </div>
       </div>
