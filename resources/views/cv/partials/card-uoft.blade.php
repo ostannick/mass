@@ -1,4 +1,4 @@
-<div class="ui card">
+<div class="ui fluid card">
   <div class="image">
     <img src="{{asset('img/logo-uoft.png')}}">
   </div>
