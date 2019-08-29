@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="ui grid">
+<div class="ui stackable grid">
   <div class="four wide column">
 
     <h2>Nicholas K. H. Ostan</h2>
@@ -22,7 +22,7 @@
     @include('cv.partials.projects')
 
     <h3>Education</h3>
-    <div class="ui three column grid">
+    <div class="ui three column stackable grid">
       <div class="column">
         @include('cv.partials.card-uoft')
       </div>
