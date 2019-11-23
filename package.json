@@ -31,6 +31,7 @@
     "test": "tests"
   },
   "dependencies": {
+    "apexcharts": "^3.10.1",
     "fomantic-ui": "^2.7.6",
     "fsevents": "^1.2.9",
     "gulp": "^4.0.2",

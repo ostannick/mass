@@ -14,6 +14,7 @@
         <!--Javascript Libraries-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.7/dist/semantic.min.js"></script>
+
         <script src="{{asset('js/init.js')}}"></script>
 
     </head>
@@ -30,8 +31,6 @@
           </div>
         </div>
       </div>
-
-      <!-- Load Vue here -->
 
     </body>
 
