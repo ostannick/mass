@@ -25,19 +25,6 @@
     </ul>
   </li>
   <li class="item">
-    <i class="fal fa-fw fa-cog"></i> Entrez Utilities
-    <ul>
-      <a href="/entrez"><li>Get Genomic Context</li></a>
-    </ul>
-  </li>
-  <li class="item">
-    <i class="fal fa-fw fa-bacon"></i>Cloning Suite
-    <ul>
-      <a href="/primers"><li>Primer & Construct Design</li></a>
-      <a href="/assembler"><li>Sequence Assembler</li></a>
-    </ul>
-  </li>
-  <li class="item">
     <i class="fal fa-fw fa-book-reader"></i> Learning
     <ul>
       <a href="/books"><li>Book List</li></a>

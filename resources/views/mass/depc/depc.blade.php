@@ -11,6 +11,7 @@
       <textarea name="protein_sequence"></textarea>
     </div>
 
+    @include('partials.enzyme-select')
 
     <div class="field">
       <button type="submit" class="ui teal submit button">Submit</button>

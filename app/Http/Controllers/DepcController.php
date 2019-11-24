@@ -37,11 +37,12 @@ class DepcController extends Controller
     {
       #Remove linebreaks
       $sequence = preg_replace( "/\r|\n/", "", $request->protein_sequence);
+      $protease = $request->protease;
 
-      $analysis = shell_exec("py ../python/depc.py $sequence");
+      $analysis = shell_exec("py ../python/depc.py $sequence $protease");
 
       $analysis = json_decode($analysis);
-      
+
       return view('mass.depc.analyze')->with([
         'analysis' => $analysis
       ]);
