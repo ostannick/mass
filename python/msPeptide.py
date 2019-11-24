@@ -1,14 +1,17 @@
 import re
 import copy
+from pyopenms import *
 from Bio.SeqUtils import molecular_weight
 
 class msPeptide:
-    def __init__(self, seq):
+    def __init__(self, seq, group=0):
         self.seq = seq
         self.massShift = 0
         self.modificationLog = []
+        self.group = group
+        self.toleranceConflicts = 0
 
-    def seq(self):
+    def sequence(self):
         return str(self.seq)
 
     def len(self):
@@ -34,12 +37,14 @@ class msPeptide:
             childPeptides.append(childPep)
         return childPeptides
 
+    def setCustomMassShift(self, shift):
+        self.massShift = shift
+
+    def addCustomMassShift(self, shift):
+        self.massShift += shift
+
+    def modLog(self):
+        return self.modificationLog
+
     def mz1(self):
-        return (self.mw() + self.massShift)
-
-pep = msPeptide("MMCAAAWDAWDACWAWCM")
-
-newPeps = pep.varMethionineOxidation()
-
-for pep in newPeps:
-    print(pep.mz1())
+        return (self.mw() + self.massShift + 1.007276466879)

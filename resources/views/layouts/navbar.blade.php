@@ -9,6 +9,7 @@
       <a href="/peptides"><li>Peptide Database</li></a>
       <a href="/peptides"><li>Peptide Analytics</li></a>
       <a href="/nn"><li>MALDI Ionization Predictor</li></a>
+      <a href="/depc"><li>MALDI DEPC Library Search</a></a>
     </ul>
   </li>
   <li class="item">

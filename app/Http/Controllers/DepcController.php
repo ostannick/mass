@@ -14,7 +14,7 @@ class DepcController extends Controller
      */
     public function index()
     {
-        //
+        return view('mass.depc.depc');
     }
 
     /**
@@ -35,7 +35,16 @@ class DepcController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      #Remove linebreaks
+      $sequence = preg_replace( "/\r|\n/", "", $request->protein_sequence);
+
+      $analysis = shell_exec("py ../python/depc.py $sequence");
+
+      $analysis = json_decode($analysis);
+      
+      return view('mass.depc.analyze')->with([
+        'analysis' => $analysis
+      ]);
     }
 
     /**

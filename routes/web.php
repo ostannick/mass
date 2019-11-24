@@ -23,6 +23,7 @@ Route::get('/python', function() {
 
 Route::resource('/mass', 'MassController');
 Route::resource('/peptides', 'PeptideController');
+Route::resource('/depc', 'DepcController');
 Route::get('/analyze', 'PeptideController@analyze');
 
 Route::resource('/prosecco', 'ProseccoController');
