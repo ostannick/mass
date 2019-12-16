@@ -20,6 +20,11 @@
   line-height: 26pt;
 }
 
+.cc {
+  display: flex;
+  justify-content: center;
+}
+
 pre {
   background: #f4f4f4;
   border: 1px solid #ddd;
@@ -34,14 +39,16 @@ pre {
   max-width: 100%;
   overflow: auto;
   padding: 1em 1.5em;
-  display: block;
+  display: inline-block;
   word-wrap: break-word;
+
 }
 
 pre.out {
   background-color: #343335;
   color: white;
   border-left: 3px solid #6574cd;
+  word-break: break-word;
 }
 
 @media screen and (min-width: 1200px) {
@@ -227,4 +234,3 @@ pre.out {
   justify-content: center;
   width: 100%;
 }
-

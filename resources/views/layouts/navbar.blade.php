@@ -1,21 +1,22 @@
 <div class="navbar">
 
-  <li class="main item"><a href="/cv"><i class="fal fa-fw fa-wave-square"></i></a></li>
+  <li class="main item"><a href="/"><i class="fal fa-fw fa-wave-square"></i></a></li>
   <li class="item sandwich"><i class="fal fa-fw fa-bars"></i></li>
   <li class="item">
-    <i class="fal fa-fw fa-chart-bar"></i> Mass Spectrometry Tools
+    <i class="fal fa-fw fa-chart-bar"></i> Mass Spectrometry
     <ul>
       <a href="/mass"><li>Peptide Mass Fingerprinting Analysis</li></a>
       <a href="/peptides"><li>Peptide Database</li></a>
-      <a href="/peptides"><li>Peptide Analytics</li></a>
       <a href="/nn"><li>MALDI Ionization Predictor</li></a>
       <a href="/depc"><li>MALDI DEPC Library Search</a></a>
+      <a href="/hdxl"><li>High-Density Crosslinking Analysis</a></a>
     </ul>
   </li>
   <li class="item">
-    <i class="fal fa-fw fa-chart-network"></i> Crystallography Tools
+    <i class="fal fa-fw fa-chart-network"></i> Crystallography
     <ul>
-      <a href="#"><li></li></a>
+      <a href="/xtalcourse"><li>Online Course</li></a>
+      <a href="/books"><li>Book</li></a>
     </ul>
   </li>
   <li class="item">
@@ -24,40 +25,48 @@
       <a href="/prosecco"><li>Visualize Chemical Shift Predictions</li></a>
     </ul>
   </li>
-  <li class="item">
-    <i class="fal fa-fw fa-book-reader"></i> Learning
-    <ul>
-      <a href="/books"><li>Book List</li></a>
-      <a href="/python"><li>Python for Graduate Studies</li></a>
-      <a href="/glossary"><li>Glossary</li></a>
-    </ul>
-  </li>
 
   <div class="navbar-login">
-    <li><button class="ui violet button disabled">Register</button></li>
+    @guest
+    <li><a href="/register" class="ui purple button">Register</a></li>
     <li><button id="login-button" class="ui teal button">Log In</button></li>
+    @endguest
+
+
+
+    @auth
+
+    @if(Auth::user()->admin)
+    <li><a href="/admin" class="ui teal button">Admin</a></li>
+    @endif
+
+    <li><a href="/dashboard" class="ui blue button">Dashboard</a></li>
+    <li><a href="/logout" class="ui red button">Log Out</a></li>
+    @endauth
   </div>
 </div>
 
 
 @guest
+
 <div id="login-modal" class="ui modal">
   <div class="header">Log In</div>
   <div class="content">
-    <div class="ui massive form">
-  <div class="two fields">
-    <div class="field">
-      <input placeholder="Username" type="text">
+
+    <form class="ui massive form" method="POST" action="{{ route('login') }}">
+      @csrf
+      <div class="two fields">
+        <div class="field">
+          <input placeholder="Email" name="email" type="text" autofocus>
+        </div>
+        <div class="field">
+          <input placeholder="Password" name="password" type="password">
+        </div>
+      </div>
+      <button type="submit" class="ui fluid huge teal button">Login</button>
+    </form>
     </div>
-    <div class="field">
-      <input placeholder="Password" type="password">
-    </div>
+
   </div>
-</div>
-  </div>
-  <div class="actions">
-    <div class="ui red cancel button">Cancel</div>
-    <div class="ui teal button">Login</div>
-  </div>
-</div>
+
 @endguest

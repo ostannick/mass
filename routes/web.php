@@ -12,13 +12,25 @@ Route::get('/publications', function(){
     return view('cv.publications.publications');
 });
 
+Route::get('dashboard', function() {
+    return view('auth.dashboard');
+
+})->middleware('auth');
+
+Route::get('admin', function() {
+    return view('admin.dashboard');
+
+})->middleware('auth');
+
 //Learning
 Route::get('/books', function() {
     return view('learn.books');
 });
-
-Route::get('/python', function() {
-  return view('python.lessons.introduction');
+Route::get('/xtalcourse', function() {
+  return view('xtalcourse.introduction');
+});
+Route::get('/xtalcourse/dna', function() {
+  return view('xtalcourse.dna');
 });
 
 Route::resource('/mass', 'MassController');
@@ -36,3 +48,7 @@ Route::post('/entrez/records', 'EntrezController@records');
 Route::get('/test', function(){
   return view('test');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
