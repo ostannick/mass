@@ -14,10 +14,12 @@
   If you do choose to clone your protein of interest into an expression vector that has an affinity purifican tag, or a solubility tag, it is recommended that you also engineer in a cleavage site for a specific protease such as <a href="https://en.wikipedia.org/wiki/TEV_protease">Tobacco Etch Virus (TEV) protease</a>, or <a href="https://en.wikipedia.org/wiki/Thrombin">thrombin</a>. We do not want 'floppy' tags interfering with the crystallization process. We also do not want the possibility of tags altering the local or global conformation of our protein, resulting in a misleading structure.
 </p>
 
-<p>You should also note that overexpression of a protein in a model organism can sometimes result in misfolding. Additionally, if the model organism is incapable of adding the necessary post-translational modifications to the protein on appropriate sites (i.e. glycosylation, SUMOylation, phosphorylation, etc.), then you may end up solving the structure of a protein with no function. For this reason, it is important to always test that your protein is functional before you crystallize it. Who cares about the structure of a useless protein?</p>
+<p>
+  You should also note that overexpression of a protein in a model organism can sometimes result in misfolding. Additionally, if the model organism is incapable of adding the necessary post-translational modifications to the protein on appropriate sites (i.e. glycosylation, SUMOylation, phosphorylation, etc.), then you may end up solving the structure of a protein with no function. For this reason, it is important to always test that your protein is functional before you crystallize it. Who cares about the structure of a useless protein?
+</p>
 
 <p>
-I have done most of my research in microbiology labs, so I will use a bacterial protein as an example target for this walk-through. We will be trying to crystallize a transferrin-binding protein from <i>Neisseria lactamica</i>. The DNA sequence that encodes this protein can be seen <a href="https://www.ncbi.nlm.nih.gov/nuccore/AM849587.1">here</a>, and below. This this is an outer-membrane receptor protein that enhances the hijacking of iron from human transferrin. In other words, this protein acts as a hand that grabs onto human iron-binding proteins, and helps steal the iron for its own growth.
+  I have done most of my research in microbiology labs, so I will use a bacterial protein as an example target for this walk-through. We will be trying to crystallize a transferrin-binding protein from <i>Neisseria lactamica</i>. The DNA sequence that encodes this protein can be seen <a href="https://www.ncbi.nlm.nih.gov/nuccore/AM849587.1">here</a>, and below. This this is an outer-membrane receptor protein that enhances the hijacking of iron from human transferrin. In other words, this protein acts as a hand that grabs onto human iron-binding proteins, and helps steal the iron for its own growth.
 </p>
 
 <h4>DNA Sequence</h4>
