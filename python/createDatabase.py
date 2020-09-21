@@ -42,10 +42,12 @@ def varMod(pepObj, mod=None, aaString=None, massShift=None, name=None):
     return pepList
 
 class peptideDatabase:
-    def __init__(self, sequence, enzyme):
+    def __init__(self, sequence, enzyme, protein_name):
+        self.protein_name = protein_name
         self.sequence = AASequence.fromString(sequence)
         self.enzyme = enzyme
         self.msPeptides = []
+        self.db = []
 
         # Create the digest object
         dig = ProteaseDigestion()
@@ -57,11 +59,9 @@ class peptideDatabase:
         tempList = []
         dig.digest(self.sequence, tempList)
 
-        # Start group counter at 1
-        i = 1
         for pep in tempList:
-            self.msPeptides.append(msPeptide(pep.toString().decode("utf-8"), group=i))
-            i += 1
+            self.msPeptides.append(msPeptide(str(pep)))
+
 
     def getPeptides(self):
         return self.msPeptides
@@ -84,13 +84,11 @@ class peptideDatabase:
     def generate(self, iodo=False, variableModifications=None):
         masterList = []
 
-        if(iodo):
-            for pep in self.msPeptides:
+        for pep in self.msPeptides:
+            if(iodo):
                 pep.iodoacetamide()
-                masterList.append(pep)
-        else:
-            for pep in self.msPeptides:
-                masterList.append(pep)
+
+            masterList.append(pep)
 
         for mod in variableModifications:
             tempList = []
@@ -98,26 +96,28 @@ class peptideDatabase:
                 tempList.extend(varMod(pep, mod))
             masterList.extend(tempList)
 
-        # print("Search space increased by " + str(len(masterList) / len(self.msPeptides)) + "x")
         self.msPeptides = masterList
-        return self
 
-    def serializeDatabase(self):
-        json_db = []
         for x in range(len(self.msPeptides)):
-            json_db.append({
+            self.db.append({
             "id": x,
+            "parent": self.protein_name,
             "sequence": self.msPeptides[x].sequence(),
+            "mz": self.msPeptides[x].mz(),
             "mz1": self.msPeptides[x].mz1(),
             "length": self.msPeptides[x].len(),
-            "group": self.msPeptides[x].group,
             "massShift": self.msPeptides[x].massShift,
-            "modifications": json.dumps(self.msPeptides[x].modLog()),
-            "toleranceConflicts": self.msPeptides[x].toleranceConflicts,
-
+            "modf_cys": "iodoacetamide",
+            "modv_mso": self.msPeptides[x].mso,
             })
 
-        return json.dumps(json_db)
+        return self
+
+    def get_as_list(self):
+        return self.db
+
+    def serializeDatabase(self):
+        return json.dumps(self.db)
 
     def sort(self):
 

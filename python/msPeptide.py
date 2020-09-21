@@ -5,11 +5,13 @@ from Bio.SeqUtils import molecular_weight
 
 class msPeptide:
     def __init__(self, seq, group=0):
+        self.parent = "UnknownProtein"
         self.seq = seq
         self.massShift = 0
         self.modificationLog = []
         self.group = group
         self.toleranceConflicts = 0
+        self.mso = False
 
     def sequence(self):
         return str(self.seq)
@@ -34,6 +36,7 @@ class msPeptide:
         for mod in range(0, potential_modifications):
             childPep = copy.deepcopy(self)
             childPep.massShift += (mod * 15.9994)
+            childPep.mso = True
             childPeptides.append(childPep)
         return childPeptides
 
@@ -46,5 +49,11 @@ class msPeptide:
     def modLog(self):
         return self.modificationLog
 
+    def mz(self):
+        return (self.mw() + self.massShift)
+
     def mz1(self):
         return (self.mw() + self.massShift + 1.007276466879)
+
+    def mzn(self, n = 1):
+        return (self.mw() + self.massShift + (1.007276466879 * n))/n
